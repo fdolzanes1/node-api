@@ -1,4 +1,5 @@
 const http = require('http');
+const cors = require('cors')
 const express = require('express');
 const mongoose = require('mongoose');
 const requireDir = require('require-dir');
@@ -6,6 +7,12 @@ requireDir('./src/models');
 
 //Iniciando o App
 const app = express();
+
+//Cors
+app.use(cors())
+
+//Data Parsing
+app.use(express.json());
 
 //Conectando DB
 const urlhost = process.env.MONGODB_URI || process.env.MONGOHQ_URL || "mongodb://localhost:27017/contacts";
@@ -23,9 +30,6 @@ mongoose.connect(urlhost,
 mongoose.connection.on('connected', () => {
     console.log('Mongoose is connected!!!!');
 });
-
-//Data Parsing
-app.use(express.json());
 
 //HTTP
 app.use('/api', require('./src/routes'));
