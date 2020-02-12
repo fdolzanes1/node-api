@@ -1,0 +1,33 @@
+~ node -v
+~ npm -v 
+
+~ mkdir node-api
+> cd node-api 
+~ npm init -y 
+~ npm install express 
+
+> server.js 
+
+~ npm install -D nodemon
+> package.json 
+	"dev": "nodemon server.js"
+~ npm run dev
+
+instalar docker 
+~ docker pull mongo 
+~ docker run --name mongodb -p 27017:27017 -d mongo
+~ docker ps 
+~ docker ps -a
+~ docker rm {NAME}
+browser url: localhost:27017 
+
+instalar robo3t -> conectar 
+localhost:27017 
+
+~ npm install mongoose
+
+> src/models/Contact.js 
+
+~ npm install require-dir
+
+> src/routes
