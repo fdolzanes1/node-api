@@ -1,6 +1,5 @@
+onst http = require('http');
 const express = require('express');
-const cors = require('cors');
-const http = require('http');
 const mongoose = require('mongoose');
 const requireDir = require('require-dir');
 requireDir('./src/models');
@@ -27,7 +26,6 @@ mongoose.connection.on('connected', () => {
 
 //Data Parsing
 app.use(express.json());
-app.use(cors);
 
 //HTTP
 app.use('/api', require('./src/routes'));
