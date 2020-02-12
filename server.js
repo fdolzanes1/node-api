@@ -9,8 +9,9 @@ const app = express();
 
 
 //Conectando DB
-var urlhost = process.env.MONGODB_URI || process.env.MONGOHQ_URL || "mongodb://localhost:27017/contacts";
-var theport = process.env.PORT || 8080 || 5000;
+const urlhost = process.env.MONGODB_URI || process.env.MONGOHQ_URL || "mongodb://localhost:27017/contacts";
+const theport = process.env.PORT || 5000;
+
 //Iniciando DB
 mongoose.connect(urlhost, 
   {
@@ -20,15 +21,13 @@ mongoose.connect(urlhost,
   }
 );
 
-
 mongoose.connection.on('connected', () => {
     console.log('Mongoose is connected!!!!');
 });
-
 
 //Data Parsing
 app.use(express.json());
 
 //HTTP
 app.use('/api', require('./src/routes'));
-app.listen(PORT);
+app.listen(PORT, console.log(`Server is starting at ${PORT}`));
