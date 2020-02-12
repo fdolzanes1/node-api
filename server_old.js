@@ -2,15 +2,14 @@ const http = require('http');
 const express = require('express');
 const mongoose = require('mongoose');
 const requireDir = require('require-dir');
-requireDir('./src/models');
 
 //Iniciando o App
 const app = express(); 
-
+app.use(express.json());
 
 //Conectando DB
-var urlhost = process.env.MONGODB_URI || process.env.MONGOHQ_URL || "mongodb://localhost:27017/contacts";
-var theport = process.env.PORT || 8080;
+var urlhost = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || "mongodb://localhost:27017/contacts";
+var theport = process.env.PORT || 5000;
 //Iniciando DB
 mongoose.connect(urlhost, 
   {
@@ -20,15 +19,8 @@ mongoose.connect(urlhost,
   }
 );
 
+requireDir('./src/models');
 
-mongoose.connection.on('connected', () => {
-    console.log('Mongoose is connected!!!!');
-});
-
-
-//Data Parsing
-app.use(express.json());
-
-//HTTP
+//Rotas
 app.use('/api', require('./src/routes'));
-app.listen(PORT);
+app.listen('3001');
