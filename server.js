@@ -10,7 +10,7 @@ const app = express();
 
 //Conectando DB
 var urlhost = process.env.MONGODB_URI || process.env.MONGOHQ_URL || "mongodb://localhost:27017/contacts";
-var theport = process.env.PORT || 8080;
+var theport = process.env.PORT || 8080 || 5000;
 //Iniciando DB
 mongoose.connect(urlhost, 
   {
