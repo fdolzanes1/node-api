@@ -1,12 +1,12 @@
-const http = require('http');
 const express = require('express');
+const cors = require('cors');
+const http = require('http');
 const mongoose = require('mongoose');
 const requireDir = require('require-dir');
 requireDir('./src/models');
 
 //Iniciando o App
-const app = express(); 
-
+const app = express();
 
 //Conectando DB
 const urlhost = process.env.MONGODB_URI || process.env.MONGOHQ_URL || "mongodb://localhost:27017/contacts";
@@ -27,6 +27,7 @@ mongoose.connection.on('connected', () => {
 
 //Data Parsing
 app.use(express.json());
+app.use(cors);
 
 //HTTP
 app.use('/api', require('./src/routes'));
