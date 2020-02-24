@@ -9,7 +9,7 @@ requireDir('./src/models');
 const app = express();
 
 //Cors
-app.use(cors())
+app.use(cors());
 
 //Data Parsing
 app.use(express.json());
