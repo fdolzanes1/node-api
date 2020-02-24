@@ -11,6 +11,16 @@ const app = express();
 //Cors
 app.use(cors());
 
+// Configuring CORS W/ Dynamic Origin 
+var corsOptions = {
+  origin: 'https://nameless-badlands-32634.herokuapp.com/',
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
+
+app.get('/contacts/:id', cors(corsOptions), function (req, res, next) {
+  res.json({msg: 'This is CORS-enabled for a whitelisted domain.'})
+})
+
 //Data Parsing
 app.use(express.json());
 
