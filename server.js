@@ -11,28 +11,11 @@ const app = express();
 //Cors
 app.use(cors());
 
-app.use(function(req, res, next) {
-   res.header("Access-Control-Allow-Origin", "*");
-   res.header('Access-Control-Allow-Methods', 'DELETE, PUT, GET, POST');
-   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-   next();
-});
-
 // Configuring CORS W/ Dynamic Origin 
-app.options(require('./src/routes'), cors());
 
 app.get(require('./src/routes'), cors(), function (req, res, next) {
   res.json({msg: 'This is CORS-enabled for a whitelisted domain.'})
 }); 
-
-app.post(require('./src/routes'), cors(), (req, res) => {
-  console.info("POST /simple-cors");
-  res.json({
-    text: "Simple CORS requests are working. [POST]"
-  });
-});
-
-
 
 //Data Parsing
 app.use(express.json());
