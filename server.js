@@ -3,6 +3,8 @@ const cors = require('cors');
 const express = require('express');
 const mongoose = require('mongoose');
 const requireDir = require('require-dir');
+const bodyParser = require('body-parser');
+
 requireDir('./src/models');
 
 //Iniciando o App
@@ -10,9 +12,17 @@ const app = express();
 
 //Cors
 app.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 //Data Parsing
 app.use(express.json());
+app.use(function(request, response, next) {
+    response.header("Access-Control-Allow-Origin", "*");
+    response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization")
+next();
+});
+
 
 //Conectando DB
 const urlhost = process.env.MONGODB_URI || process.env.MONGOHQ_URL || "mongodb://localhost:27017/contacts";
